@@ -8,6 +8,9 @@ bastion_IP = 178.154.231.167
 someinternalhost_IP = 10.128.0.8
 ```
 
+WEB-интерфейс pritunl (с SSL от LE):
+https://178.154.231.167.sslip.io
+
 Для подключения в одну команду и используя алиасы добавляем в ~/.ssh/config:
 ```Host bastion
   HostName 178.154.231.167
