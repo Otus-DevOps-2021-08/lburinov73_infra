@@ -31,7 +31,7 @@ Host someinternalhost
 
 Данные для подключения:
 ```
-testapp_IP = 10.128.0.15
+testapp_IP = 130.193.49.28
 testapp_port = 9292
 ```
 
