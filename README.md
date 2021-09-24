@@ -1,8 +1,8 @@
 # lburinov73_infra
 lburinov73 Infra repository
 
-## домашнее задание 5 лекции
-Данные для подключения
+## домашнее задание N3 (cloud-bastion)
+Данные для подключения:
 ```
 bastion_IP = 178.154.231.167
 someinternalhost_IP = 10.128.0.8
@@ -27,4 +27,16 @@ Host someinternalhost
 ```
 После чего можно использовать `ssh someinternalhost`.
 
+## домашнее задание N4 (cloud-testapp)
 
+Данные для подключения:
+```
+testapp_IP = 130.193.49.28
+testapp_port = 9292
+```
+
+Для создания инстанса с автоматическим деплоем приложения был написан bootstrap-скрипт:
+```
+sh startup.sh
+```
+(создается инстанс, через user-data передается sh-скрипт (bootstrap.sh), который выполняется через cloud-init при первом запуске VM)
