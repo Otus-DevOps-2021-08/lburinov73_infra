@@ -40,3 +40,19 @@ testapp_port = 9292
 sh startup.sh
 ```
 (создается инстанс, через user-data передается sh-скрипт (bootstrap.sh), который выполняется через cloud-init при первом запуске VM)
+
+## домашнее задание N5 (reddit-base)
+
+Было сделано:
+Создан сервисный аккаунт
+Создан конфиг packer - ubuntu16.json
+Создан образ reddit-base
+Создана VM из образа reddit-base
+Параметризирован конфиг packer
+Создан конфиг packer - immutable.json
+Создан скрипт (create-reddit-vm.sh) для создания VM из образа reddit-full
+
+Для проверки:
+Запустить packer build -var-file=variables.json ubuntu16.json
+Запустить packer build -var-file=variables.json immutable.json
+Запустить sh create-reddit-vm.sh
