@@ -1,0 +1,51 @@
+provider "yandex" {
+  service_account_key_file = "../../key.json"
+
+  version   = "0.35"
+  # token     = "AQAAAABYia3AAATuwauQx-SVpkLpmk_moU93PcU"
+  cloud_id  = "b1gh707s3q2fqqms3k87"
+  folder_id = "b1g4httodue8h1h7tgnf"
+  zone      = "ru-central1-a"
+}
+
+resource "yandex_compute_instance" "app" {
+
+  name = "reddit-app"
+
+  resources {
+    cores = 2
+    memory = 2
+  }
+
+  boot_disk {
+    initialize_params {
+       image_id = "fd8h5q4cneo9gvu7uq63"
+    }
+  }
+
+  network_interface {
+    subnet_id = "e9b1ou23mckhebo6u7at"
+    nat = true
+  }
+
+  metadata = {
+    ssh-keys = "ubuntu:${file("~/.ssh/appuser.pub")}"
+  }
+
+  connection {
+    type = "ssh"
+    host = yandex_compute_instance.app.network_interface.0.nat_ip_address
+    user = "ubuntu"
+    agent = false
+    private_key = file("~/.ssh/appuser")
+  }
+
+  provisioner "file" {
+    source = "files/puma.service"
+    destination = "/tmp/puma.service"
+  }
+
+  provisioner "remote-exec" {
+    script = "files/deploy.sh"
+  }
+}
