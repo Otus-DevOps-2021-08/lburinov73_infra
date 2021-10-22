@@ -20,3 +20,7 @@ variable res_core_fraction {
   description = "Baseline performance for a core as a percent"
   default     = 5
 }
+variable environment {
+  description = "Environment"
+  default     = "stage"
+}
