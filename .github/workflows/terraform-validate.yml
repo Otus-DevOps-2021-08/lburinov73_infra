@@ -1,0 +1,30 @@
+---
+
+name: Terraform Validate
+
+on:
+  push: {}
+  pull_request: {}
+
+jobs:
+  terraform-stage:
+    runs-on: ubuntu-latest
+    name: terraform
+    defaults:
+      run:
+        working-directory: terraform/stage
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.12.29
+
+      - name: Init Terraform
+        run: terraform init -backend=false
+
+      - name: Validate Terraform
+        run: terraform validate -var-file=terraform.tfvars.example
