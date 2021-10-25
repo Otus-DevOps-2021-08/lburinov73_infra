@@ -12,7 +12,7 @@ module "app" {
   private_key_path = var.private_key_path
   app_disk_image   = var.app_disk_image
   subnet_id        = yandex_vpc_subnet.app-subnet.id
-  database_url     = "${module.db.vpc_ip_address_db}"
+  database_url     = module.db.vpc_ip_address_db
   environment      = var.environment
 }
 
