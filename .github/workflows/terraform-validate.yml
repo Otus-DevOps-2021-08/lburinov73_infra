@@ -50,3 +50,39 @@ jobs:
 
       - name: Validate Terraform
         run: terraform validate -var-file=terraform.tfvars.example
+
+  terraform-tflint-prod-env:
+    runs-on: ubuntu-latest
+    name: tflint - validate prod environment
+
+    defaults:
+      run:
+        working-directory: terraform/prod
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install TFLint
+        uses: terraform-linters/setup-tflint@v1
+
+      - name: Run TFLint
+        run: tflint --var-file=terraform.tfvars.example
+
+  terraform-tflint-stage-env:
+    runs-on: ubuntu-latest
+    name: tflint - validate stage environment
+
+    defaults:
+      run:
+        working-directory: terraform/stage
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install TFLint
+        uses: terraform-linters/setup-tflint@v1
+
+      - name: Run TFLint
+        run: tflint --var-file=terraform.tfvars.example
