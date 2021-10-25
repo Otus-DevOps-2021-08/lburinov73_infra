@@ -1,0 +1,23 @@
+---
+
+name: Packer Validate All Templates
+
+on:
+  push: {}
+  pull_request: {}
+
+jobs:
+  packer:
+    runs-on: ubuntu-latest
+    name: packer
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Validate Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -var-file=packer/variables.json.example -syntax-only
+          target: packer/*.json

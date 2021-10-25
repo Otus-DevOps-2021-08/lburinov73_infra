@@ -1,0 +1,88 @@
+---
+
+name: Terraform Validate
+
+on:
+  push: {}
+  pull_request: {}
+
+jobs:
+  terraform-validate-stage-env:
+    runs-on: ubuntu-latest
+    name: terraform - validate stage environment
+    defaults:
+      run:
+        working-directory: terraform/stage
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.12.29
+
+      - name: Init Terraform
+        run: terraform init -backend=false
+
+      - name: Validate Terraform
+        run: terraform validate -var-file=terraform.tfvars.example
+
+  terraform-validate-prod-env:
+    runs-on: ubuntu-latest
+    name: terraform - validate prod environment
+    defaults:
+      run:
+        working-directory: terraform/prod
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.12.29
+
+      - name: Init Terraform
+        run: terraform init -backend=false
+
+      - name: Validate Terraform
+        run: terraform validate -var-file=terraform.tfvars.example
+
+  terraform-tflint-prod-env:
+    runs-on: ubuntu-latest
+    name: tflint - validate prod environment
+
+    defaults:
+      run:
+        working-directory: terraform/prod
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install TFLint
+        uses: terraform-linters/setup-tflint@v1
+
+      - name: Run TFLint
+        run: tflint --var-file=terraform.tfvars.example
+
+  terraform-tflint-stage-env:
+    runs-on: ubuntu-latest
+    name: tflint - validate stage environment
+
+    defaults:
+      run:
+        working-directory: terraform/stage
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install TFLint
+        uses: terraform-linters/setup-tflint@v1
+
+      - name: Run TFLint
+        run: tflint --var-file=terraform.tfvars.example

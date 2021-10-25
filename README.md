@@ -1,6 +1,11 @@
 # lburinov73_infra
 lburinov73 Infra repository
 
+![Packer workflow status](https://github.com/Otus-DevOps-2021-08/lburinov73_infra/actions/workflows/packer-validate.yml/badge.svg)
+![Terraform workflow status](https://github.com/Otus-DevOps-2021-08/lburinov73_infra/actions/workflows/terraform-validate.yml/badge.svg)
+![Ansible workflow status](https://github.com/Otus-DevOps-2021-08/lburinov73_infra/actions/workflows/ansible-lint.yml/badge.svg)
+
+
 ## домашнее задание N3 (cloud-bastion)
 Данные для подключения:
 ```
@@ -94,3 +99,9 @@ sh startup.sh
 Было сделано:
 Выполнено основное задание.
 Выполнено задание со *: в рамках ДЗ N8 (ansible-1) уже был написан скрипт для динамического инвентаря YandexCloud.
+
+## домашнее задание N10 (ansible-3)
+Было сделано:
+Выполнено основной задание.
+Выполнено задание со *: модифицирован скрипт динамического инвентаря для работы с окружениями prod и stage.
+Выполнено задание с **: добавлены workflows для валидации ansible, terraform и packer; добавлены бейджи со статусами.

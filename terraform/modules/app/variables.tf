@@ -26,3 +26,7 @@ variable res_core_fraction {
 variable database_url {
   description = "ip:port of db instance"
 }
+variable environment {
+  description = "Environment"
+  default     = "stage"
+}
